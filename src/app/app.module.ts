@@ -28,6 +28,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     HttpClientModule,
     FormsModule,
 
+    GaugeModule,
+
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
