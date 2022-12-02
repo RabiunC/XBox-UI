@@ -1,5 +1,5 @@
 export interface Game {
-    background_image: string;
+  background_image: string;
     name: string;
     released: string;
     metacritic_url: string;
@@ -25,6 +25,7 @@ export interface Game {
   interface ParentPlatform {
     platform: {
       name: string;
+      slug: string;
     };
   }
   
