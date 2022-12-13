@@ -17,12 +17,14 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { HomeComponent } from './components/home/home.component';
 import { HttpHeadersInteceptor } from './interceptors/http-headers-interceptor';
 import { HttpErrorsInterceptor } from './interceptors/http-errors-interceptor';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBarComponent,
-    HomeComponent
+    HomeComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,7 @@ import { HttpErrorsInterceptor } from './interceptors/http-errors-interceptor';
     HttpClientModule,
     FormsModule,
 
-    GaugeModule,
+    GaugeModule.forRoot(),
 
     MatFormFieldModule,
     MatIconModule,

@@ -9,6 +9,8 @@ import { APIResponse, Game } from 'src/app/models'
 })
 export class HttpService {
 
+  addKey :string = '?key=a6efab855a964f1ca103391495e66f2f';
+
   constructor(private http: HttpClient) { }
 
   getGameList(
@@ -22,9 +24,14 @@ export class HttpService {
       params = new HttpParams().set('ordering', ordering).set('search', search);
     }
 
-    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}`, {
+    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}${this.addKey}`, {
         params: params
       });
+  }
+
+  getGameDetails(id: string) : Observable<Game> {
+
+      return this.http.get<Game>(`${env.BASE_URL}/${id}${this.addKey}`);
   }
 
 }
