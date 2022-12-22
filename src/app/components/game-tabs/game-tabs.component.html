@@ -1,39 +1,43 @@
 <div class="game-tabs">
     <mat-tab-group mat-align-tabs="start" backgroundColor="primary">
         <mat-tab label="About">
-            <p class="game-tabs-par">
+            <p *ngIf="game.parent_platforms?.length" class="game-tabs-par">
                 Platforms:
-                <span>PC</span>
+                <span *ngFor="let x of game.parent_platforms; let last = last">{{ x.platform.name }}<span *ngIf="!last">, </span>
+            </span>
             </p>
             <p class="game-tabs-par">
                 Publishers:
-                <span>Konami</span>
+                <span *ngFor="let x of game.publishers; let last = last">{{ x.name }}</span>
             </p>
-            <p class="game-tabs-par">
+            <p *ngIf="game.website" class="game-tabs-par">
                 Website:
-                <a class="game-tabs-link" href="#" target="_blank"></a>
+                <a class="game-tabs-link" href="{{ game.website }}" target="_blank">{{ game.website }}</a>
             </p>
-            <div class="game-description">Some Description</div>
-            <p class="mat-tab-votes">
-                <span>
+            <div class="game-description" [innerHTML]="game.description"></div>
+            <p *ngFor="let rating of game.ratings" class="mat-tab-votes">
+                <span *ngIf="rating.title == 'exceptional'">
                     <mat-icon class="game-votes-up">thumb_up</mat-icon>
-                    <span class="game-votes-count">55</span>
+                    <span class="game-votes-count">{{rating.count || 0}}</span>
                 </span>
-                <span>
+                <span *ngIf="rating.title == 'skip'">
                     <mat-icon class="game-votes-down">thumb_down</mat-icon>
-                    <span class="game-votes-count">15</span>
+                    <span class="game-votes-count">{{rating.count || 0}}</span>
                 </span>               
             </p>
         </mat-tab>
-        <mat-tab label="Screenshots">
-            <img class="game-screenshot"
-                src="../../../assets/sega.svg"
-                alt="screenshot"
-            />
+        <mat-tab *ngIf="game.screenshots?.length" label="Screenshots">
+            <span *ngFor="let x of game.screenshots">
+                <img class="game-screenshot"
+                    src="{{ x.image }}"
+                    alt="{{ x.image }}"
+                />
+            </span>
         </mat-tab>
-        <mat-tab label="Trailers">
-            <video class="game-trailer" controls>
-                <source src="https://youtu.be/HhD9WQTfUQ0" type="video/mp4">
+        <mat-tab label="Trailers" *ngIf="game.trailers?.length">
+            <video class="game-trailer" controls *ngFor="let x of game.trailers">
+
+                <source src="{{ x.data?.max }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </mat-tab>
